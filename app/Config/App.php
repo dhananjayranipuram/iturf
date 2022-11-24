@@ -24,7 +24,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'BASE_URL_ADDRESS';
+    public $baseURL = BASE_URL_ADDRESS;
 
     /**
      * --------------------------------------------------------------------------
