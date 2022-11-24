@@ -24,7 +24,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'http://iturf.local/';
+    public $baseURL = 'BASE_URL_ADDRESS';
 
     /**
      * --------------------------------------------------------------------------

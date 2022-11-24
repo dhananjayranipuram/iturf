@@ -92,3 +92,21 @@ define('EVENT_PRIORITY_NORMAL', 100);
  * @deprecated Use \CodeIgniter\Events\Events::PRIORITY_HIGH instead.
  */
 define('EVENT_PRIORITY_HIGH', 10);
+
+$host = $_SERVER['HTTP_HOST'];
+
+switch ($host) {
+    case 'http://iturf.local/':
+        $baseUrl = 'http://iturf.local/';
+        break;
+    case '18.191.161.78':
+        $baseUrl = 'http://18.191.161.78/iturf/';
+        break;
+    case 'helderclone.com':
+        $baseUrl = 'http://helderclone.com/iturf/';
+        break;
+    default:
+        $baseUrl = 'http://iturf.local/';
+        break;
+}
+define('BASE_URL_ADDRESS', $baseUrl);
