@@ -103,13 +103,13 @@ switch ($host) {
         $baseUrl = 'http://18.191.161.78/iturf/';
         break;
     case 'helderclone.com':
-        $baseUrl = 'https://helderclone.com/test-dhanajay/iturf/public/index.php';
+        $baseUrl = 'https://helderclone.com/iturf/public/index.php';
         break;
     case 'https://helderclone.com':
-        $baseUrl = 'https://helderclone.com/test-dhanajay/iturf/public/index.php';
+        $baseUrl = 'https://helderclone.com/iturf/public/index.php';
         break;
     default:
-        $baseUrl = 'https://helderclone.com/test-dhanajay/iturf/public/index.php';
+        $baseUrl = 'https://helderclone.com/iturf/public/index.php';
         break;
 }
 // echo $baseUrl;exit;
