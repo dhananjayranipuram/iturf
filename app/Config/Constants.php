@@ -109,7 +109,7 @@ switch ($host) {
         $baseUrl = 'https://helderclone.com/test-dhanajay/iturf/public/index.php';
         break;
     default:
-        $baseUrl = 'http://localhost/iturf/public/index.php';
+        $baseUrl = 'https://helderclone.com/test-dhanajay/iturf/public/index.php';
         break;
 }
 // echo $baseUrl;exit;
