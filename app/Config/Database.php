@@ -32,9 +32,9 @@ class Database extends Config
      */
     public $default = [
         'DSN'      => '',
-        'hostname' => 'localhost',
-        'username' => 'root',
-        'password' => '',
+        'hostname' => '172-31-29-181',
+        'username' => 'hc',
+        'password' => '#@#FrVz3eI3MK6kG',
         'database' => 'iturf',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
