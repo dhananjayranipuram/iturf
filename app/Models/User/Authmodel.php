@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\User;
 
 use CodeIgniter\Model;
 use Exception;
@@ -18,7 +18,6 @@ class AuthModel extends Model
     {
         $db      = \Config\Database::connect();
         $query=$db->query("SELECT * FROM users WHERE mobile_number=$data[mobile] AND password=$data[password]");
-        // $res = $query->getResultArray();
         $res = $query->getNumRows();
         if($res==0)
             return false;
@@ -36,5 +35,20 @@ class AuthModel extends Model
         $db      = \Config\Database::connect();
         $query=$db->query("INSERT INTO auth_tokens (user_id,user_token) VALUES ('$res->id','$token');");
         return $query;
+    }
+
+    public function insertUser($data){
+
+        $db      = \Config\Database::connect();
+        $query=$db->query("SELECT name FROM users WHERE mobile_number=$data[mobile_number]");
+        if($query->getNumRows()<1){
+            $db      = \Config\Database::connect();
+            $sql = "INSERT INTO users (name,user_name,mobile_number,password,user_type,district,address,pin_code,avatar) VALUES ('$data[name]','$data[user_name]','$data[mobile_number]','$data[password]','$data[user_type]','$data[district]','$data[address]','$data[pin_code]','$data[avatar]' ) ;";
+
+            $query=$db->query($sql);
+            return $query;
+        }else{
+            return false;
+        }
     }
 }
