@@ -33,9 +33,9 @@ class Database extends Config
     public $default = [
         'DSN'      => '',
         'hostname' => '172-31-29-181',
-        'username' => 'hc',
+        'username' => 'hctest',
         'password' => '#@#FrVz3eI3MK6kG',
-        'database' => 'iturf',
+        'database' => 'hc',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,
