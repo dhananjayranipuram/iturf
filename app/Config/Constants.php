@@ -103,5 +103,5 @@ switch ($host) {
         $baseUrl = 'https://helderclone.com/iturf/public/index.php';
         break;
 }
-
+echo $host;exit;
 define('BASE_URL_ADDRESS', $baseUrl);

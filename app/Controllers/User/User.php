@@ -125,4 +125,23 @@ class User extends BaseController
 
     }
 
+    public function sendOtp(){
+
+        $response = [
+            'message' => 'Success'
+        ];
+        return $this->respond($response, 200);
+    }
+
+    public function verifyOtp(){
+
+        $res = [];
+        $res = 'valid otp';
+        $response = [
+            'data' => $res,
+            'message' => 'Success'
+        ];
+        return $this->respond($response, 200);
+    }
+
 }

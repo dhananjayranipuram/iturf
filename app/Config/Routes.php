@@ -41,6 +41,8 @@ $routes->post('/login', 'User\User::login');
 $routes->post('/register', 'User\User::register');
 $routes->post('/book', 'Book::book', ['filter' => 'authFilter']);
 $routes->get('/getAvatar', 'User\User::getAvatar', ['filter' => 'authFilter']);
+$routes->post('/sendOtp', 'User\User::sendOtp', ['filter' => 'authFilter']);
+$routes->post('/verifyOtp', 'User\User::verifyOtp', ['filter' => 'authFilter']);
 // $routes->post('/login', 'Home::sample');
 /*
  * --------------------------------------------------------------------
