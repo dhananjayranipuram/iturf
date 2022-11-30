@@ -96,21 +96,12 @@ define('EVENT_PRIORITY_HIGH', 10);
 $host = $_SERVER['HTTP_HOST'];
 
 switch ($host) {
-    case 'http://iturf.local/':
+    case 'iturf.local':
         $baseUrl = 'http://iturf.local/';
-        break;
-    case '18.191.161.78':
-        $baseUrl = 'http://18.191.161.78/iturf/';
-        break;
-    case 'helderclone.com':
-        $baseUrl = 'https://helderclone.com/iturf/public/index.php';
-        break;
-    case 'https://helderclone.com':
-        $baseUrl = 'https://helderclone.com/iturf/public/index.php';
         break;
     default:
         $baseUrl = 'https://helderclone.com/iturf/public/index.php';
         break;
 }
-echo $baseUrl;exit;
+
 define('BASE_URL_ADDRESS', $baseUrl);
