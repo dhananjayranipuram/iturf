@@ -100,7 +100,7 @@ switch ($host) {
         $baseUrl = 'http://iturf.local/';
         break;
     default:
-        $baseUrl = $_SERVER['HTTP_HOST']."/public/";
+        $baseUrl = $_SERVER['HTTP_HOST'];
         break;
 }
 // echo $baseUrl;exit;
