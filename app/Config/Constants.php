@@ -103,5 +103,5 @@ switch ($host) {
         $baseUrl = $_SERVER['HTTP_HOST']."/public/";
         break;
 }
-echo $baseUrl;exit;
+// echo $baseUrl;exit;
 define('BASE_URL_ADDRESS', $baseUrl);
