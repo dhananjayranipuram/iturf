@@ -103,5 +103,5 @@ switch ($host) {
         $baseUrl = "http://iturf.co.in/index.php/";
         break;
 }
-// echo $baseUrl;exit;
+echo $baseUrl;exit;
 define('BASE_URL_ADDRESS', $baseUrl);
