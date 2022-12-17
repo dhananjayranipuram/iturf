@@ -100,8 +100,8 @@ switch ($host) {
         $baseUrl = 'http://iturf.local/';
         break;
     default:
-        $baseUrl = $_SERVER['HTTP_HOST'];
+        $baseUrl = 'https://helderclone.com/iturf/public/index.php';
         break;
 }
-// echo $baseUrl;exit;
+// echo $host;exit;
 define('BASE_URL_ADDRESS', $baseUrl);
