@@ -32,10 +32,10 @@ class Database extends Config
      */
     public $default = [
         'DSN'      => '',
-        'hostname' => 'iturfdb-1.cumgvnhqdtiz.ap-south-1.rds.amazonaws.com',
-        'username' => 'admin',
-        'password' => 'UNQUIqsPsgFEz0VuWoVn',
-        'database' => 'iturfdb-1',
+        'hostname' => 'iturf.cumgvnhqdtiz.ap-south-1.rds.amazonaws.com',
+        'username' => 'iturf',
+        'password' => 'Dhananjay123',
+        'database' => 'iturf',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,
