@@ -17,6 +17,7 @@ class AuthModel extends Model
     public function verify_user($data)
     {
         $db      = \Config\Database::connect();
+        print_r($db);exit;
         $query=$db->query("SELECT * FROM users WHERE mobile_number=$data[mobile] AND password=$data[password]");
         $res = $query->getNumRows();
         if($res==0)
@@ -46,7 +47,8 @@ class AuthModel extends Model
             $sql = "INSERT INTO users (name,user_name,mobile_number,password,user_type,district,address,pin_code,avatar) VALUES ('$data[name]','$data[user_name]','$data[mobile_number]','$data[password]','$data[user_type]','$data[district]','$data[address]','$data[pin_code]','$data[avatar]' ) ;";
 
             $query=$db->query($sql);
-            return $query;
+            $user_id = $db->insertId();
+            return $user_id;
         }else{
             return false;
         }
