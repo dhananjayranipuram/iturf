@@ -18,6 +18,7 @@ class AuthModel extends Model
 
     public function verify_user($data)
     {
+        echo 456;exit;
         $db      = \Config\Database::connect();
         print_r($db);exit;
         $query=$db->query("SELECT * FROM users WHERE mobile_number=$data[mobile] AND password=$data[password]");
