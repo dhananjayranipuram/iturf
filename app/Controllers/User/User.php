@@ -20,7 +20,6 @@ class User extends BaseController
         ];
         $input = $this->getRequestInput($this->request);
         if ($this->validateRequest($input, $rules)) {
-            echo 258;exit;
             $authModel = new AuthModel();
             echo 147;exit;
             $res = $authModel->verify_user($input);
