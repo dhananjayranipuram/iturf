@@ -19,6 +19,7 @@ class User extends BaseController
             'password' => 'required'
         ];
         $input = $this->getRequestInput($this->request);
+        echo 123;exit;
         if ($this->validateRequest($input, $rules)) {
 
             $authModel = new AuthModel();
@@ -104,9 +105,12 @@ class User extends BaseController
             $inputData['password'] = $input['password']; 
 
             $authModel = new AuthModel();
-            if($authModel->insertUser($inputData)){
+            $res = $authModel->insertUser($inputData);
+            if($res){
                 $response = [
-                    'message' => 'Successfully saved.'
+                    'status' => 200,
+                    'message' => 'Successfully saved.',
+                    'user_id' => $res
                 ];
                 return $this->respond($response, 200);
             }else{
