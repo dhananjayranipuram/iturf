@@ -19,11 +19,11 @@ class User extends BaseController
             'password' => 'required'
         ];
         $input = $this->getRequestInput($this->request);
-        echo 123;exit;
         if ($this->validateRequest($input, $rules)) {
 
             $authModel = new AuthModel();
             $res = $authModel->verify_user($input);
+            print_r($res);exit;
             if ($res !== false) {
 
 
