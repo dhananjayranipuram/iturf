@@ -11,6 +11,8 @@ class AuthModel extends Model
     public function __construct()
     {
 
+        $conn = new mysqli('iturf.cumgvnhqdtiz.ap-south-1.rds.amazonaws.com', 'iturfnew', 'Dhananjay123');
+        print_r($conn);exit;
         // $this->group_table = $this->config->item('TBL_GROUPS', 'DB_TABLES');
     }
 
