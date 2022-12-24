@@ -12,7 +12,7 @@ class Home extends BaseController
     
     public function index()
     {
-        echo phpinfo();exit;
+        // echo phpinfo();exit;
         return view('welcome_message');
     }
 
