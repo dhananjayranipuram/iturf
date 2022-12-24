@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\User\AuthModel;
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
 use \Firebase\JWT\JWT;
@@ -12,6 +13,8 @@ class Home extends BaseController
     
     public function index()
     {
+        $authModel = new AuthModel();
+        echo 147;exit;
         // echo phpinfo();exit;
         return view('welcome_message');
     }
