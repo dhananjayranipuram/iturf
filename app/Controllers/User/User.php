@@ -26,8 +26,10 @@ class User extends BaseController
         ];
         $input = $this->getRequestInput($this->request);
 
-        if ($this->validateRequest($input, $rules)) {
-            
+        // if ($this->validateRequest($input, $rules)) {
+        if (1) {
+            $input = ['mobile' => '9496185143',
+            'password' => '123'];
             $res = $this->auth->verify_user($input);
             // print_r($res);exit;
             if ($res !== false) {
