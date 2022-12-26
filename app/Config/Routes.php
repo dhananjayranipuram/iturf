@@ -37,7 +37,7 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 // $routes->get('/test', 'Home::index');
-$routes->post('/login', 'User\User::login');
+$routes->get('/test', 'User\User::login');
 $routes->post('/register', 'User\User::register');
 $routes->post('/book', 'Book::book', ['filter' => 'authFilter']);
 $routes->get('/getAvatar', 'User\User::getAvatar', ['filter' => 'authFilter']);
