@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\User\AuthModel;
+use App\Models\AuthModel;
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
 use \Firebase\JWT\JWT;
@@ -13,11 +13,14 @@ class Home extends BaseController
 
     public function __construct()
     {
+        $this->load->model('auth_model','model');
         $this->auth = new AuthModel();
     }
     
     public function index()
     {
+        $this->model->verify_user();
+        echo 258;exit;
         $this->auth->verify_user();
         echo 147;exit;
         // echo phpinfo();exit;
