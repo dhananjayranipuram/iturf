@@ -29,7 +29,7 @@ class User extends BaseController
         if ($this->validateRequest($input, $rules)) {
             
             $res = $this->auth->verify_user($input);
-            print_r($res);exit;
+            // print_r($res);exit;
             if ($res !== false) {
 
 
