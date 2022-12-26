@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controllers;
-namespace App\Models;
 
 use App\Models\AuthModel;
 use App\Controllers\BaseController;
@@ -14,7 +13,8 @@ class Home extends BaseController
 
     public function __construct()
     {
-        $this->auth = new AuthModel();
+        // $this->auth = new AuthModel();
+        $auth = new \App\Models\AuthModel();
     }
     
     public function index()
