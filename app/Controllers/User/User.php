@@ -54,7 +54,7 @@ class User extends BaseController
                     'message' => 'Login Succesful',
                     'token' => $token
                 ];
-                if($authModel->insertToken($input,$token))
+                if($this->auth->insertToken($input,$token))
                     return $this->respond($response, 200);
             }else{
                 $response = [
