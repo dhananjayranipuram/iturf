@@ -12,6 +12,12 @@ class User extends BaseController
 {
     use ResponseTrait;
 
+    public function __construct()
+    {
+        // $this->auth = new AuthModel();
+        $this->auth = new \App\Models\User\AuthModel();
+    }
+
     public function login(){
         
         $rules = [
@@ -22,9 +28,7 @@ class User extends BaseController
 
         if ($this->validateRequest($input, $rules)) {
             
-            $authModel = new AuthModel();
-            echo 147;exit;
-            $res = $authModel->verify_user($input);
+            $res = $this->auth->verify_user($input);
             print_r($res);exit;
             if ($res !== false) {
 

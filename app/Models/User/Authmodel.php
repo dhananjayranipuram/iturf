@@ -10,23 +10,18 @@ class AuthModel extends Model
                   
     public function __construct()
     {
-        echo 123;exit;
-        $conn = new mysqli('iturf.cumgvnhqdtiz.ap-south-1.rds.amazonaws.com', 'iturfnew', 'Dhananjay123');
-        print_r($conn);exit;
-        // $this->group_table = $this->config->item('TBL_GROUPS', 'DB_TABLES');
+
     }
 
     public function verify_user($data)
     {
-        echo 456;exit;
         $db      = \Config\Database::connect();
-        print_r($db);exit;
         $query=$db->query("SELECT * FROM users WHERE mobile_number=$data[mobile] AND password=$data[password]");
         $res = $query->getNumRows();
         if($res==0)
             return false;
         else
-            true;
+            return true;
 
     }
 
