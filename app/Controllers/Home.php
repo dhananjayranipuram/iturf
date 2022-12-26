@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\User\AuthModel;
+use \App\Models\User\AuthModel;
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
 use \Firebase\JWT\JWT;
