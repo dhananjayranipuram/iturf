@@ -14,7 +14,7 @@ class Home extends BaseController
     public function __construct()
     {
         // $this->auth = new AuthModel();
-        $auth = new \App\Models\AuthModel();
+        $this->auth = new \App\Models\AuthModel();
     }
     
     public function index()
