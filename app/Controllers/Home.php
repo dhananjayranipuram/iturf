@@ -19,7 +19,11 @@ class Home extends BaseController
     
     public function index()
     {
-        $this->auth->verify_user('123');
+        $test = [
+            'mobile' => '9496185143',
+            'password' => '123'
+        ];
+        $this->auth->verify_user($test);
         echo 147;exit;
         // echo phpinfo();exit;
         return view('welcome_message');
