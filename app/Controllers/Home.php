@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\AuthModel;
+use App\Models\User\AuthModel;
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
 use \Firebase\JWT\JWT;
@@ -10,10 +10,15 @@ use \Firebase\JWT\JWT;
 class Home extends BaseController
 {
     use ResponseTrait;
+
+    public function __construct()
+    {
+        $this->auth = new AuthModel();
+    }
     
     public function index()
     {
-        $authModel = new AuthModel();
+        $this->auth->verify_user();
         echo 147;exit;
         // echo phpinfo();exit;
         return view('welcome_message');
