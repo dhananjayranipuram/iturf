@@ -20,51 +20,63 @@ class User extends BaseController
 
     public function login(){
         
-        $rules = [
-            'mobile' => 'required|min_length[10]',
-            'password' => 'required'
-        ];
-        $input = $this->getRequestInput($this->request);
+        try{
+            $rules = [
+                'mobile' => 'required|min_length[10]',
+                'password' => 'required'
+            ];
+            $input = $this->getRequestInput($this->request);
 
-        if ($this->validateRequest($input, $rules)) {
-            $res = $this->auth->verify_user($input);
-            // print_r($res);exit;
-            if ($res !== false) {
+            if ($this->validateRequest($input, $rules)) {
+                $res = $this->auth->verify_user($input);
+                // print_r($res);exit;
+                if ($res !== false) {
 
 
-                $key = "kodombelur";
-                $iat = time(); // current timestamp value
-                $exp = $iat + 3600;
-        
-                $payload = array(
-                    "iss" => "Dhananjay",
-                    "aud" => "Robert",
-                    "sub" => "User session",
-                    "iat" => $iat, //Time the JWT issued at
-                    "exp" => $exp, // Expiration time of token
-                    "mobile" => "9496185143",
-                );
-                
-                $token = JWT::encode($payload, $key, 'HS256');
+                    $key = "kodombelur";
+                    $iat = time(); // current timestamp value
+                    $exp = $iat + 3600;
+            
+                    $payload = array(
+                        "iss" => "Dhananjay",
+                        "aud" => "Robert",
+                        "sub" => "User session",
+                        "iat" => $iat, //Time the JWT issued at
+                        "exp" => $exp, // Expiration time of token
+                        "mobile" => "9496185143",
+                    );
+                    
+                    $token = JWT::encode($payload, $key, 'HS256');
 
-                $response = [
-                    'message' => 'Login Succesful',
-                    'token' => $token
-                ];
-                if($this->auth->insertToken($input,$token))
-                    return $this->respond($response, 200);
+                    $response = [
+                        'code' => 200,
+                        'message' => 'Login Succesful',
+                        'token' => $token
+                    ];
+                    if($this->auth->insertToken($input,$token))
+                        return $this->respond($response, 200);
+                }else{
+                    $response = [
+                        'code' => 401,
+                        'message' => 'Invalid user',
+                    ];
+                    return $this->respond($response, 401);
+                }
             }else{
                 $response = [
-                    'message' => 'Invalid user',
+                    'code' => 409,
+                    'errors' => $this->validator->getErrors(),
+                    'message' => 'Invalid Inputs'
                 ];
-                return $this->fail($response, 101);
+                return $this->respond($response , 409);
             }
-        }else{
+        }catch(Exception $e){
             $response = [
-                'errors' => $this->validator->getErrors(),
-                'message' => 'Invalid Inputs'
+                'code' => 500,
+                'errors' => $e,
+                'message' => 'Something went wrong.'
             ];
-            return $this->fail($response , 409);
+            return $this->respond($response , 500);
         }
 
     }
@@ -74,6 +86,7 @@ class User extends BaseController
         $authModel = new AvatarModel();
         $res = $authModel->getAvatar();
         $response = [
+            'code' => 200,
             'data' => $res,
             'message' => 'Success'
         ];

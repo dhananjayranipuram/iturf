@@ -11,6 +11,11 @@ class Turf extends BaseController
 {
     use ResponseTrait;
 
+    public function __construct()
+    {
+        $this->turfModel = new \App\Models\Turf\TurfModel();
+    }
+
     public function registerTurf(){
         
         $rules = [
@@ -33,26 +38,23 @@ class Turf extends BaseController
 
             $input['events'] = implode(',',$input['events']);
             $input['facilities'] = implode(',',$input['facilities']);
-            
-            $turfModel = new TurfModel();
 
-            
+            $input['image_link'] = [];
             if(!empty($input['images'])){
                 // md5(uniqid(time()));exit;
                 foreach ($input['images'] as $key => $value) {
-                    $baseFolder = ROOTPATH .'writable/uploads/turfimages/';
+                    $baseFolder = WRITEPATH .'uploads/turfimages/';
                     if (!file_exists($baseFolder)) {
                         mkdir($baseFolder, 777, true);
                     }
                     $filename = $baseFolder . md5(uniqid(time())) .'.'.explode('/', mime_content_type($value))[1];
                     $data = base64_decode(trim(explode(',', explode(';', $value)[1])[1]));
                     file_put_contents($filename,$data);
-                }echo 123;exit;
+                    array_push($input['image_link'],str_replace("\\",'/',$filename));
+                }
             }
-
-            // $decoded=base64_decode($base64Image);
-            // file_put_contents('newImage.JPG',$decoded);
-            if($turfModel->insertTurfDetails($input)){
+            // print_r($input['image_link']);exit;
+            if($this->turfModel->insertTurfDetails($input)){
                 $response = [
                     'message' => 'Successfully saved.'
                 ];
@@ -78,14 +80,16 @@ class Turf extends BaseController
         $rules = [
             'user_id' => 'required'
         ];
-        $input = $this->request->getGet();
+        $input = $this->getRequestInput($this->request);
         if ($this->validateRequest($input, $rules)) { 
-
+            $res = $this->turfModel->getVendorData($input);
+            $facilities = $this->turfModel->getfacilitiesData($input);
+            $events = $this->turfModel->geteventsData($input);
+            exit;
         }else{
             
         }
-        $turfModel = new TurfModel();
-        $res = $turfModel->getVendorData();
+        // $res = $this->turfModel->getVendorData();
         $response = [
             'data' => $res,
             'message' => 'Success'
