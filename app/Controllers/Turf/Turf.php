@@ -53,7 +53,7 @@ class Turf extends BaseController
                         array_push($input['image_link'],str_replace("\\",'/',$filename));
                     }
                 }
-                // print_r($input['image_link']);exit;
+                print_r($input);exit;
                 if($this->turfModel->insertTurfDetails($input)){
                     $response = [
                         'code' => 200,
