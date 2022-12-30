@@ -139,7 +139,7 @@ class Turf extends BaseController
                 $res->facilities = $this->turfModel->getfacilitiesData($facilitiesInput);
                 $res->images = $this->turfModel->getTurfImages($res->id);
                 $res->events = $this->turfModel->geteventsData($eventInput);
-                
+                echo 123;exit;
                 $response = [
                     'data' => $res,
                     'message' => 'Success'
