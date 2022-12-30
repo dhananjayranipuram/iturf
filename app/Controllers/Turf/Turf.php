@@ -131,8 +131,10 @@ class Turf extends BaseController
                 'lat' => 'required',
                 'lon' => 'required'
             ];
-            $input = $this->getRequestInput($this->request);
-            if ($this->validateRequest($input, $rules)) { 
+            // $input = $this->getRequestInput($this->request);
+            $input = ['lat'=> '10.00145', 'lon'=>'76.2828'];
+            // if ($this->validateRequest($input, $rules)) { 
+            if(1)
                 $res = $this->turfModel->getTurfData($input);
                 $eventInput = "'".str_replace(",","','",$res->events)."'";
                 $facilitiesInput = "'".str_replace(",","','",$res->facilities)."'";
