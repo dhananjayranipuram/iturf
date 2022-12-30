@@ -43,7 +43,7 @@ $routes->post('/book', 'Book::book', ['filter' => 'authFilter']);
 $routes->get('/getAvatar', 'User\User::getAvatar', ['filter' => 'authFilter']);
 $routes->post('/sendOtp', 'User\User::sendOtp');
 $routes->post('/verifyOtp', 'User\User::verifyOtp');
-$routes->get('/saveVendorTurfDetails', 'Turf\Turf::registerTurf');
+$routes->post('/saveVendorTurfDetails', 'Turf\Turf::registerTurf', ['filter' => 'authFilter']);
 $routes->post('/getVendorTurfDetails', 'Turf\Turf::getVendorDetails', ['filter' => 'authFilter']);
 $routes->post('/turfSearch', 'Turf\Turf::getTurfSearch', ['filter' => 'authFilter']);
 // $routes->post('/login', 'Home::sample');
