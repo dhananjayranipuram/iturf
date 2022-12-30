@@ -35,7 +35,7 @@ class User extends BaseController
 
                     $key = "kodombelur";
                     $iat = time(); // current timestamp value
-                    $exp = $iat + 3600;
+                    $exp = $iat + 36000;
             
                     $payload = array(
                         "iss" => "Dhananjay",
@@ -60,7 +60,7 @@ class User extends BaseController
                         'code' => 401,
                         'message' => 'Invalid user',
                     ];
-                    return $this->respond($response, 401);
+                    return $this->respond($response, 200);
                 }
             }else{
                 $response = [
@@ -68,7 +68,7 @@ class User extends BaseController
                     'errors' => $this->validator->getErrors(),
                     'message' => 'Invalid Inputs'
                 ];
-                return $this->respond($response , 409);
+                return $this->respond($response , 200);
             }
         }catch(Exception $e){
             $response = [
@@ -76,7 +76,7 @@ class User extends BaseController
                 'errors' => $e,
                 'message' => 'Something went wrong.'
             ];
-            return $this->respond($response , 500);
+            return $this->respond($response , 200);
         }
 
     }
@@ -95,54 +95,63 @@ class User extends BaseController
     }
 
     public function register(){
-        
-        $rules = [
-            'name' => 'required',
-            'mobile' => 'required|min_length[10]',
-            'user_name' => 'required',
-            'address' => 'required',
-            'district' => 'required',
-            'user_type'=> 'required',
-            'pincode' => 'required|min_length[6]',
-            'avatar' => 'required',
-            'password' => 'required|min_length[8]'
-        ];
+        try{
+            $rules = [
+                'name' => 'required',
+                'mobile' => 'required|min_length[10]',
+                'user_name' => 'required',
+                'address' => 'required',
+                'district' => 'required',
+                'user_type'=> 'required',
+                'pincode' => 'required|min_length[6]',
+                'avatar' => 'required',
+                'password' => 'required|min_length[8]'
+            ];
 
-        $input = $this->getRequestInput($this->request);
-        if ($this->validateRequest($input, $rules)) {
-            
-            $inputData = [];
-            $inputData['name'] = $input['name']; 
-            $inputData['mobile_number'] = $input['mobile']; 
-            $inputData['user_name'] = $input['user_name']; 
-            $inputData['user_type'] = $input['user_type']; 
-            $inputData['address'] = $input['address']; 
-            $inputData['district'] = $input['district']; 
-            $inputData['pin_code'] = $input['pincode']; 
-            $inputData['avatar'] = $input['avatar']; 
-            $inputData['password'] = $input['password']; 
+            $input = $this->getRequestInput($this->request);
+            if ($this->validateRequest($input, $rules)) {
+                
+                $inputData = [];
+                $inputData['name'] = $input['name']; 
+                $inputData['mobile_number'] = $input['mobile']; 
+                $inputData['user_name'] = $input['user_name']; 
+                $inputData['user_type'] = $input['user_type']; 
+                $inputData['address'] = $input['address']; 
+                $inputData['district'] = $input['district']; 
+                $inputData['pin_code'] = $input['pincode']; 
+                $inputData['avatar'] = $input['avatar']; 
+                $inputData['password'] = $input['password']; 
 
-            $authModel = new AuthModel();
-            $res = $this->auth->insertUser($inputData);
-            if($res){
-                $response = [
-                    'status' => 200,
-                    'message' => 'Successfully saved.',
-                    'user_id' => $res
-                ];
-                return $this->respond($response, 200);
+                $res = $this->auth->insertUser($inputData);
+                if($res){
+                    $response = [
+                        'status' => 200,
+                        'message' => 'Successfully saved.',
+                        'user_id' => $res
+                    ];
+                    return $this->respond($response, 200);
+                }else{
+                    $response = [
+                        'code' => 403,
+                        'message' => 'User already exist',
+                    ];
+                    return $this->respond($response, 200);
+                }
             }else{
                 $response = [
-                    'message' => 'User already exist',
+                    'code' => 409,
+                    'errors' => $this->validator->getErrors(),
+                    'message' => 'Invalid Inputs'
                 ];
-                return $this->fail($response, 403);
+                return $this->respond($response , 200);
             }
-        }else{
+        }catch(Exception $e){
             $response = [
-                'errors' => $this->validator->getErrors(),
-                'message' => 'Invalid Inputs'
+                'code' => 500,
+                'errors' => $e,
+                'message' => 'Something went wrong.'
             ];
-            return $this->fail($response , 409);
+            return $this->respond($response , 200);
         }
 
     }

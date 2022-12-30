@@ -67,10 +67,29 @@ class TurfModel extends Model
         return $res;
     }
 
+    public function getfacilitiesData($input){
+        $db      = \Config\Database::connect();
+        $sql = "SELECT id,name FROM turf_facilities where id in($input)";
+
+        $query=$db->query($sql);
+        $res = $query->getResultArray();
+        
+        return $res;
+    }
+
+    public function geteventsData($input){
+        $db      = \Config\Database::connect();
+        $sql = "SELECT id,name FROM turf_events where id in($input)";
+        
+        $query=$db->query($sql);
+        $res = $query->getResultArray();
+        return $res;
+    }
+
     public function getTurfData($data){
         $db      = \Config\Database::connect();
-        $lat = $data['lon'];
-        $lon = $data['lat'];
+        $lat = $data['lat'];
+        $lon = $data['lon'];
         $sql = "SELECT 
                     id,
                     user_id,
@@ -83,13 +102,29 @@ class TurfModel extends Model
                     available_to_date,
                     working_hr_from,
                     working_hr_to,
-                    (3959 * ACOS(COS(RADIANS($lat)) * COS(RADIANS(lat)) * COS(RADIANS(lon) - RADIANS($lon)) + SIN(RADIANS($lat)) * SIN(RADIANS(lat)))) AS distance
+                    /*(3959 * ACOS(COS(RADIANS($lat)) * COS(RADIANS(lat)) * COS(RADIANS(lon) - RADIANS($lon)) + SIN(RADIANS($lat)) * SIN(RADIANS(lat))))*1.609 AS distance*/ 
+                    /*(3959 * acos(cos(radians($lat)) * cos(radians(lat)) * cos( radians(long) - radians($lon)) + sin(radians($lat)) * sin(radians(lat)))) AS distance */
+                    
+                    111.111 *
+                    DEGREES(ACOS(LEAST(1.0, COS(RADIANS(lat))
+                    * COS(RADIANS($lat))
+                    * COS(RADIANS(lon - $lon))
+                    + SIN(RADIANS(lat))
+                    * SIN(RADIANS($lat))))) AS distance
                 FROM
                     turf_details
-                HAVING distance < 50
-                ORDER BY distance";
+                HAVING distance < 50";
         $query=$db->query($sql);
         $res = $query->getRow();
+        return $res;
+    }
+
+    public function getTurfImages($input){
+        $db      = \Config\Database::connect();
+        $sql = "SELECT image_link FROM turf_details_images where turf_id = $input";
+        
+        $query=$db->query($sql);
+        $res = $query->getResultArray();
         return $res;
     }
 }
