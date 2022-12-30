@@ -94,16 +94,23 @@ class Turf extends BaseController
             $input = $this->getRequestInput($this->request);
             if ($this->validateRequest($input, $rules)) { 
                 $res = $this->turfModel->getVendorData($input);
-                $eventInput = "'".str_replace(",","','",$res->events)."'";
-                $facilitiesInput = "'".str_replace(",","','",$res->facilities)."'";
-                $res->facilities = $this->turfModel->getfacilitiesData($facilitiesInput);
-                $res->images = $this->turfModel->getTurfImages($res->id);
-                $res->events = $this->turfModel->geteventsData($eventInput);
-                
-                $response = [
-                    'data' => $res,
-                    'message' => 'Success'
-                ];
+                if(!empty($res)){
+                    $eventInput = "'".str_replace(",","','",$res->events)."'";
+                    $facilitiesInput = "'".str_replace(",","','",$res->facilities)."'";
+                    $res->facilities = $this->turfModel->getfacilitiesData($facilitiesInput);
+                    $res->images = $this->turfModel->getTurfImages($res->id);
+                    $res->events = $this->turfModel->geteventsData($eventInput);
+                    
+                    $response = [
+                        'data' => $res,
+                        'message' => 'Success'
+                    ];
+                }else{
+                    $response = [
+                        'data' => [],
+                        'message' => 'No record found.'
+                    ];    
+                }
             }else{
                 $response = [
                     'data' => $res,
