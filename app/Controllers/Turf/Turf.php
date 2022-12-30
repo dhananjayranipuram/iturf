@@ -48,6 +48,7 @@ class Turf extends BaseController
                             mkdir($baseFolder, 777, true);
                         }
                         $filename = $baseFolder . md5(uniqid(time())) .'.'.explode('/', mime_content_type($value))[1];
+                        print_r($filename);exit;
                         $data = base64_decode(trim(explode(',', explode(';', $value)[1])[1]));
                         file_put_contents($filename,$data);
                         array_push($input['image_link'],str_replace("\\",'/',$filename));
