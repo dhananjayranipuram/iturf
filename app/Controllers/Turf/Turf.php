@@ -126,7 +126,7 @@ class Turf extends BaseController
     }
 
     public function getTurfSearch(){
-        try{
+        // try{
             $rules = [
                 'lat' => 'required',
                 'lon' => 'required'
@@ -153,14 +153,14 @@ class Turf extends BaseController
             
             return $this->respond($response, 200);
             
-        }catch(Exception $e){
-            $response = [
-                'code' => 500,
-                'errors' => $e,
-                'message' => 'Something went wrong.'
-            ];
-            return $this->respond($response , 200);
-        }
+        // }catch(Exception $e){
+        //     $response = [
+        //         'code' => 500,
+        //         'errors' => $e,
+        //         'message' => 'Something went wrong.'
+        //     ];
+        //     return $this->respond($response , 200);
+        // }
 
     }
 
