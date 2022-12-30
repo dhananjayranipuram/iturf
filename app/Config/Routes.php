@@ -45,7 +45,7 @@ $routes->post('/sendOtp', 'User\User::sendOtp');
 $routes->post('/verifyOtp', 'User\User::verifyOtp');
 $routes->post('/saveVendorTurfDetails', 'Turf\Turf::registerTurf', ['filter' => 'authFilter']);
 $routes->post('/getVendorTurfDetails', 'Turf\Turf::getVendorDetails', ['filter' => 'authFilter']);
-$routes->get('/turfSearch', 'Turf\Turf::getTurfSearch');
+$routes->post('/turfSearch', 'Turf\Turf::getTurfSearch', ['filter' => 'authFilter']);
 // $routes->post('/login', 'Home::sample');
 /*
  * --------------------------------------------------------------------

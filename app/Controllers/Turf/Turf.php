@@ -48,7 +48,6 @@ class Turf extends BaseController
                             mkdir($baseFolder, 777, true);
                         }
                         $filename = $baseFolder . md5(uniqid(time())) .'.'.explode('/', mime_content_type($value))[1];
-                        print_r($filename);exit;
                         $data = base64_decode(trim(explode(',', explode(';', $value)[1])[1]));
                         file_put_contents($filename,$data);
                         array_push($input['image_link'],str_replace("\\",'/',$filename));
@@ -126,43 +125,48 @@ class Turf extends BaseController
     }
 
     public function getTurfSearch(){
-        // try{
+        try{
             $rules = [
                 'lat' => 'required',
                 'lon' => 'required'
             ];
-            // $input = $this->getRequestInput($this->request);
-            $input = ['lat'=> '10.00145', 'lon'=>'76.2828'];
-            // if ($this->validateRequest($input, $rules)) { 
-            if(1){
+            $input = $this->getRequestInput($this->request);
+            if ($this->validateRequest($input, $rules)) { 
                 $res = $this->turfModel->getTurfData($input);
-                $eventInput = "'".str_replace(",","','",$res->events)."'";
-                $facilitiesInput = "'".str_replace(",","','",$res->facilities)."'";
-                $res->facilities = $this->turfModel->getfacilitiesData($facilitiesInput);
-                $res->images = $this->turfModel->getTurfImages($res->id);
-                $res->events = $this->turfModel->geteventsData($eventInput);
-                echo 123;exit;
-                $response = [
-                    'data' => $res,
-                    'message' => 'Success'
-                ];
+                if(!empty($res)){
+                    $eventInput = "'".str_replace(",","','",$res->events)."'";
+                    $facilitiesInput = "'".str_replace(",","','",$res->facilities)."'";
+                    $res->facilities = $this->turfModel->getfacilitiesData($facilitiesInput);
+                    $res->images = $this->turfModel->getTurfImages($res->id);
+                    $res->events = $this->turfModel->geteventsData($eventInput);
+                    $response = [
+                        'data' => $res,
+                        'message' => 'Success'
+                    ];
+                }else{
+                    $response = [
+                        'data' => [],
+                        'message' => 'No record found.'
+                    ];
+                }
+                
             }else{
                 $response = [
-                    'data' => $res,
-                    'message' => 'No record found.'
+                    'data' => [],
+                    'message' => 'Invalid inputs.'
                 ];
             }
             
             return $this->respond($response, 200);
             
-        // }catch(Exception $e){
-        //     $response = [
-        //         'code' => 500,
-        //         'errors' => $e,
-        //         'message' => 'Something went wrong.'
-        //     ];
-        //     return $this->respond($response , 200);
-        // }
+        }catch(Exception $e){
+            $response = [
+                'code' => 500,
+                'errors' => $e,
+                'message' => 'Something went wrong.'
+            ];
+            return $this->respond($response , 200);
+        }
 
     }
 
